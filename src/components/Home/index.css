@@ -1,0 +1,15 @@
+.head {
+  color: #ffffff;
+  font-family: 'bree serif';
+}
+
+.headImg {
+  height: 50px;
+  padding-right: 15px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
