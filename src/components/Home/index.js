@@ -1,7 +1,11 @@
 import './index.css'
 import {Component} from 'react'
+import Loader from 'react-loader-spinner'
+import TeamCard from '../TeamCard/index'
 
 class Home extends Component {
+  state = {updatedList: [], isLoading: true}
+
   componentDidMount() {
     this.getTeams()
   }
@@ -9,13 +13,20 @@ class Home extends Component {
   getTeams = async () => {
     const response = await fetch('https://apis.ccbp.in/ipl')
     const data = await response.json()
+    const extracted = data.teams
+    const formattedData = extracted.map(each => ({
+      name: each.name,
+      id: each.id,
+      teamImageUrl: each.team_image_url,
+    }))
 
-    const formatedData = data.map()
+    this.setState({updatedList: formattedData, isLoading: false})
   }
 
-  render() {
+  displayContent = () => {
+    const {updatedList} = this.state
     return (
-      <>
+      <div className="container">
         <div className="header">
           <img
             src="https://assets.ccbp.in/frontend/react-js/ipl-logo-img.png"
@@ -24,6 +35,26 @@ class Home extends Component {
           />
           <h1 className="head">IPL Dashboard</h1>
         </div>
+        <ul className="ulContainer">
+          {updatedList.map(eachItem => (
+            <TeamCard team={eachItem} key={eachItem.id} />
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
+  render() {
+    const {isLoading} = this.state
+    return (
+      <>
+        {isLoading ? (
+          <div testid="loader">
+            <Loader type="Oval" color="#ffffff" height={50} width={50} />
+          </div>
+        ) : (
+          this.displayContent()
+        )}
       </>
     )
   }

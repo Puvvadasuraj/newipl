@@ -1,1 +1,28 @@
-/* Write your CSS here */
+.teamCardBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff33;
+  border: 2px solid #ffffff;
+  padding: 15px;
+  border-radius: 12px;
+  margin: 25px;
+  max-width: 500px;
+  cursor: pointer;
+  outline: none;
+}
+
+.teamImg {
+  height: 100px;
+  padding-right: 25px;
+}
+
+.teamName {
+  color: #ffffff;
+  font-family: 'Bree Serif';
+  padding-right: 25px;
+}
+
+.linkClass {
+  text-decoration: none;
+}
